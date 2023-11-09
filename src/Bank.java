@@ -85,12 +85,15 @@ public class Bank {
 		 Transfer from 'transferFrom' to 'TransferTo' with a given ammount?
 		 Can anyone transfer, what with people that are not part of the bank?
 		 ***/
-		if (clients.contains(currentClient)) {
-			if(currentClient.getAccounts().contains(transferFrom)) {
-				if(amount <= transferFrom.getBalance()) {
+		for (Client client: clients) {
+			if (client.getAccounts().contains(transferFrom)) {
+				if (amount <= transferFrom.getBalance()) {
 					transferFrom.removeFromBalance(amount);
 					transferTo.addToBalance(amount);
 				}
+			} else {
+				System.out.println("Sorry you are not the client of this bank, please become the client of this bank if you want to transfer. ");
+
 			}
 		}
 	}
